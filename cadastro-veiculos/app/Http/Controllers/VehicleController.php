@@ -6,60 +6,61 @@ use App\Models\vehicle;
 use Illuminate\Http\Request;
 
 class VehicleController extends Controller
+
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $vehicles = Vehicle::all();
+        return view('vehicles.index', compact('vehicles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('vehicles.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'brand' => 'required',
+            'model' => 'required',
+            'plate' => 'required|unique:vehicles',
+            'year' => 'required|digits:4|integer|min:1900|max:' . (date('Y')),
+        ]);
+
+        Vehicle::create($request->all());
+
+        return redirect()->route('vehicles.index')->with('success', 'Vehicle created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(vehicle $vehicle)
+    public function show(Vehicle $vehicle)
     {
-        //
+        return view('vehicles.show', compact('vehicle'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(vehicle $vehicle)
+    public function edit(Vehicle $vehicle)
     {
-        //
+        return view('vehicles.edit', compact('vehicle'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, vehicle $vehicle)
+    public function update(Request $request, Vehicle $vehicle)
     {
-        //
+        $request->validate([
+            'brand' => 'required',
+            'model' => 'required',
+            'plate' => 'required|unique:vehicles,plate,' . $vehicle->id,
+            'year' => 'required|digits:4|integer|min:1900|max:' . (date('Y')),
+        ]);
+
+        $vehicle->update($request->all());
+
+        return redirect()->route('vehicles.index')->with('success', 'Vehicle updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(vehicle $vehicle)
+    public function destroy(Vehicle $vehicle)
     {
-        //
+        $vehicle->delete();
+
+        return redirect()->route('vehicles.index')->with('success', 'Vehicle deleted successfully.');
     }
 }
