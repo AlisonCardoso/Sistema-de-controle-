@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\vehicle;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class VehicleController extends Controller
 
@@ -21,12 +24,29 @@ class VehicleController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'brand' => 'required',
-            'model' => 'required',
-            'plate' => 'required|unique:vehicles',
+        $$request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'brand' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+            'plate' => 'required|string|max:255|unique:vehicles',
             'year' => 'required|digits:4|integer|min:1900|max:' . (date('Y')),
         ]);
+
+        DB::transaction(function () use ($request) {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]); Vehicle::create([
+                'user_id' => $user->id,
+                'brand' => $request->brand,
+                'model' => $request->model,
+                'plate' => $request->plate,
+                'year' => $request->year,
+            ]);
+        });
 
         Vehicle::create($request->all());
 

@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
-        
+            $table->unsignedBigInteger('user_id');
             $table->string('brand');
             $table->string('model');
-            $table->string('plate');
+            $table->string('plate')->unique();
             $table->year('year');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+      
         });
     }
 
