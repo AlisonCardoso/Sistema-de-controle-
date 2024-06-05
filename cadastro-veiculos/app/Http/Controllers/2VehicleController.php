@@ -1,19 +1,16 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Models\Vehicle;
+use App\Models\vehicle;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class VehicleController extends Controller
-{
 
-/*
-    public function index()
-    {
-        $vehicles = Auth::user()->vehicles;
-        return view('vehicles.index', compact('vehicles'));
-    }
-    */
+{
     public function index()
     {
         $vehicles = Vehicle::all();
@@ -27,68 +24,61 @@ class VehicleController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $$request->validate([
+            'name' => 'required|string|max:255',
+            //'email' => 'required|string|email|max:255|unique:users',
+           // 'password' => 'required|string|min:8|confirmed',
             'brand' => 'required|string|max:255',
             'model' => 'required|string|max:255',
             'plate' => 'required|string|max:255|unique:vehicles',
-            'prefix' => 'required|string|max:8|unique:vehicles',
             'year' => 'required|digits:4|integer|min:1900|max:' . (date('Y')),
-            'characterized' => 'required',
-            'active' => 'required',
-            'price' => 'required|numeric|min:0',
-            'type' => 'required|in:car,truck,motorcycle',
-
-
-
-
-
-        
-
         ]);
+
+        DB::transaction(function () use ($request) {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]); Vehicle::create([
+                'user_id' => $user->id,
+                'brand' => $request->brand,
+                'model' => $request->model,
+                'plate' => $request->plate,
+                'year' => $request->year,
+            ]);
+        });
 
         Vehicle::create($request->all());
 
         return redirect()->route('vehicles.index')->with('success', 'Vehicle created successfully.');
     }
 
-    public function show($id)
+    public function show(Vehicle $vehicle)
     {
-        $vehicle = Vehicle::findOrFail($id);
         return view('vehicles.show', compact('vehicle'));
     }
 
-    public function edit($id)
+    public function edit(Vehicle $vehicle)
     {
-        $vehicle = Vehicle::findOrFail($id);
         return view('vehicles.edit', compact('vehicle'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Vehicle $vehicle)
     {
         $request->validate([
-            'brand' => 'required|string|max:255',
-            'model' => 'required|string|max:255',
-            'plate' => 'required|string|max:255|unique:vehicles,plate,' . $id,
-            'prefix' => 'required|string|max:8|unique:vehicles,prefix,' . $id,
+            'brand' => 'required',
+            'model' => 'required',
+            'plate' => 'required|unique:vehicles,plate,' . $vehicle->id,
             'year' => 'required|digits:4|integer|min:1900|max:' . (date('Y')),
-            'characterized' => 'required|boolean',
-            'active' => 'required|boolean',
-            'price' => 'required|numeric|min:0',
-            'type' => 'required|in:car,truck,motorcycle',
-
-
-        
         ]);
 
-        $vehicle = Vehicle::findOrFail($id);
         $vehicle->update($request->all());
 
         return redirect()->route('vehicles.index')->with('success', 'Vehicle updated successfully.');
     }
 
-    public function destroy($id)
+    public function destroy(Vehicle $vehicle)
     {
-        $vehicle = Vehicle::findOrFail($id);
         $vehicle->delete();
 
         return redirect()->route('vehicles.index')->with('success', 'Vehicle deleted successfully.');

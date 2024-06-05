@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout.layout')
 
 @section('content')
     <h1>Editar Veículo</h1>
@@ -35,3 +35,8 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @endsection
+
+
+
+
+

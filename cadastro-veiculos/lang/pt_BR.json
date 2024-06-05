@@ -115,6 +115,10 @@
   "Update your account's profile information and email address.": "Atualize as informações do perfil da sua conta e o endereço de e-mail.",
   "Use a recovery code": "Use o código recuperado",
   "Use an authentication code": "Use um código de autenticação",
+  "vehicle": "veículo",
+  "vehicles": "veículos",
+  "Vehicles": "veículos",
+  "Vehicle": "veículo",
   "Verify Email Address": "Verificar E-mail",
   "Verify Your Email Address": "Verifique seu endereço de e-mail",
   "When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application.": "Quando a autenticação de dois fatores estiver habilitada, você será solicitado a fornecer um token aleatório seguro durante a autenticação. Você pode recuperar esse token do aplicativo Google Authenticator do seu telefone.",
@@ -146,5 +150,6 @@
   "Remove this person from the team.": "Remova esta pessoa do time.",
   "Administrator users can perform any action.": "O administrador pode realizar qualquer ação.",
   "Editor users have the ability to read, create, and update.": "O editor pode ler, criar e atualizar",
-  "Remove": "Remover"
+  "Remove": "Remover",
+  "List": "Lista"
 }

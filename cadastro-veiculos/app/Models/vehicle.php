@@ -11,11 +11,19 @@ class vehicle extends Model
 
 
     protected $fillable = [
-        'user_id',
-        'brand',
-        'model',
-        'plate',
-        'year',
+        
+        'brand', // marca
+        'model', //modelo
+        'plate', //placa
+        'prefix', //prefix
+        'year', //ano
+        'characterized', //caracterizada
+        'active',// ativa,
+        'price' ,//preco
+        'type', //tipo 
+        'user_id', 
+
+        /*  */
     ];
     protected $casts = [
         'year' => 'integer',

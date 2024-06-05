@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout.layout')
 
 @section('content')
     <h1>Vehicle Details</h1>
@@ -22,3 +22,4 @@
 
     <a href="{{ route('vehicles.index') }}" class="btn btn-primary">Back</a>
 @endsection
+

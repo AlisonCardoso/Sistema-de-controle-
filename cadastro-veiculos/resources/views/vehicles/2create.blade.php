@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Create User and Vehicle</h1>
+<h1>Cadastrar Veículo</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -16,7 +16,7 @@
     <form action="{{ route('vehicles.store') }}" method="POST">
         @csrf
 
-        <h2>User Information</h2>
+        <h2>Informações do usuario</h2>
         <div class="form-group">
             <label for="name">Nome</label>
             <input type="text" name="name" class="form-control" value="{{ old('name') }}">
@@ -34,7 +34,7 @@
             <input type="password" name="password_confirmation" class="form-control">
         </div>
 
-        <h2>Vehicle Information</h2>
+        <h2>Informações do veiculo!</h2>
         <div class="form-group">
             <label for="brand">Marca</label>
             <input type="text" name="brand" class="form-control" value="{{ old('brand') }}">

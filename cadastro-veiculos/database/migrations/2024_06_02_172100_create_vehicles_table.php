@@ -13,13 +13,22 @@ return new class extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('brand');
-            $table->string('model');
-            $table->string('plate')->unique();
-            $table->year('year');
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade');
+            $table->string('brand'); //marca
+            $table->string('model');//modelo
+            $table->string('prefix')->unique();//prefixo
+            $table->boolean('characterized');// caracterizada
+            $table->boolean('active')->default(true); // Campo ativa
+            $table->string('plate')->unique(); //placa
+            $table->year('year'); 
+            $table->decimal('price', 8, 2);
+            $table->enum('type', ['car', 'truck', 'motorcycle']);
+
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+          
+
+            
+           
       
         });
     }
@@ -31,4 +40,11 @@ return new class extends Migration
     {
         Schema::dropIfExists('vehicles');
     }
+
+    public function down()
+    {
+        Schema::table('vehicles', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
+        });
 };
