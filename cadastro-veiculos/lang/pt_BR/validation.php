@@ -170,6 +170,8 @@ return [
 
     'attributes' => [
         'address'   => 'endereço',
+        'username' => 'nome de usuario',
+
         'age'       => 'idade',
         'body'      => 'conteúdo',
         'cell'      => 'célula',
