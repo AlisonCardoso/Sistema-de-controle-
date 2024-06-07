@@ -20,16 +20,18 @@ return new class extends Migration
             $table->boolean('characterized');// caracterizada
             $table->boolean('active')->default(true); // Campo ativa
             $table->string('plate')->unique(); //placa
-            $table->year('year'); 
+            $table->year('year'); //preco fipe
             $table->decimal('price', 8, 2);
-            $table->enum('type', ['car', 'truck', 'motorcycle']);
+            $table->enum('type', ['car', 'truck', 'motorcycle']); //tipo
 
             $table->timestamps();
-          
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
 
-            
-           
-      
+
+
+
+
+
         });
     }
 
@@ -39,8 +41,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('vehicles');
-        
+
     }
 
-    
+
 };

@@ -11,7 +11,7 @@ class vehicle extends Model
 
 
     protected $fillable = [
-        
+
         'brand', // marca
         'model', //modelo
         'plate', //placa
@@ -20,10 +20,10 @@ class vehicle extends Model
         'characterized', //caracterizada
         'active',// ativa,
         'price' ,//preco
-        'type', //tipo 
-        'user_id', 
+        'type', //tipo
+        'user_id',
 
-        /*  */
+       
     ];
     protected $casts = [
         'year' => 'integer',
@@ -32,7 +32,7 @@ class vehicle extends Model
     {
         return $this->belongsTo(User::class);
     }
-        
+
 }
 
 

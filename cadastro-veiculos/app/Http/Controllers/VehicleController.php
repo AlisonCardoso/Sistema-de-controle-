@@ -3,22 +3,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class VehicleController extends Controller
 {
+    public function __construct()
+    {
+        //$this->middleware('auth');
+    }
 
-/*
+
     public function index()
     {
         $vehicles = Auth::user()->vehicles;
         return view('vehicles.index', compact('vehicles'));
     }
-    */
-    public function index()
-    {
-        $vehicles = Vehicle::all();
-        return view('vehicles.index', compact('vehicles'));
-    }
+
 
     public function create()
     {
@@ -39,14 +40,9 @@ class VehicleController extends Controller
             'type' => 'required|in:car,truck,motorcycle',
 
 
-
-
-
-        
-
         ]);
 
-        Vehicle::create($request->all());
+    Auth::user()-> Vehicle::create($request->all());
 
         return redirect()->route('vehicles.index')->with('success', 'Vehicle created successfully.');
     }
@@ -77,7 +73,7 @@ class VehicleController extends Controller
             'type' => 'required|in:car,truck,motorcycle',
 
 
-        
+
         ]);
 
         $vehicle = Vehicle::findOrFail($id);
