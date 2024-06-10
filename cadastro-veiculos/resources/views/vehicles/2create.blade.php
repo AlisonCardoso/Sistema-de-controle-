@@ -56,6 +56,6 @@
             <input type="text" name="year" class="form-control" value="{{ old('year') }}">
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 @endsection
