@@ -13,13 +13,17 @@
         </div>
     @endif
 
-    <form action="{{ route('vehicles.store') }}" method="POST">
+    <form action="{{ route('vehicles.store') }}" method="POST" class="mt-6 space-y-6">
         @csrf
 
         <h2>Informações do usuario</h2>
         <div class="form-group">
             <label for="name">Nome</label>
             <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+        </div>
+        <div class="form-group">
+            <x-input-label for="user_id" >id usuario</x-input-label>
+            <input type="hidden" name="user_id" class="form-control" value="{{ Auth::user()->id}}">
         </div>
         <div class="form-group">
             <label for="email">Email</label>

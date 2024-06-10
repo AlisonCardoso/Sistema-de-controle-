@@ -44,7 +44,7 @@ class VehicleController extends Controller
 
     Auth::user()-> Vehicle::create($request->all());
 
-        return redirect()->route('vehicles.index')->with('success', 'Vehicle created successfully.');
+        return redirect()->route('vehicles.index')->with('successo', 'Veículo cadastrado com sucesso!!.');
     }
 
     public function show($id)
