@@ -32,7 +32,9 @@
             <label for="year">Ano</label>
             <input type="text" name="year" class="form-control" value="{{ $vehicle->year }}">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="flex items-center gap-4">
+            <x-primary-button>{{ __('Editar') }}</x-primary-button>
+        </div>
     </form>
 @endsection
 

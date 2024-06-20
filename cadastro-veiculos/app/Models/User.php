@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Customer;
+use App\Models\Vehicle;
 
 class User extends Authenticatable
 {
@@ -50,4 +52,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Vehicle::class);
     }
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
 }
+
+

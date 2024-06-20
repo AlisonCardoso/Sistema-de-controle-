@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class vehicle extends Model
+class Vehicle extends Model
 {
     use HasFactory;
 
@@ -23,7 +23,7 @@ class vehicle extends Model
         'type', //tipo
         'user_id',
 
-       
+
     ];
     protected $casts = [
         'year' => 'integer',

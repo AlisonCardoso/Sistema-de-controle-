@@ -21,6 +21,15 @@
                         {{ __('Veiculos') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('customers.create')" :active="request()->routeIs('customers.create')">
+                        {{ __('Novo Cliente') }}
+                    </x-nav-link>
+                </div> <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('customers.show',Auth::user()->id)" :active="request()->routeIs('customers.show')">
+                        {{ __('Lista de Clientes') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
