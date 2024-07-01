@@ -19,19 +19,20 @@
                     <table class="table">
                         <thead>
                           <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">id</th>
+
+                            
                             <th scope="col">Nome</th>
-                            <th scope="col">Email</th>
+                            <th scope="col">email</th>
+                            <th scope="col">acoes</th>
 
                           </tr>
                         </thead>
                         <tbody>
 
-                            @foreach ($customers as $clientes)
+                            @foreach ($customers as $customer)
                             <tr>
-                            <th scope="row">{{$clientes->name}}</th>
-                            <th scope="row">{{$clientes->email}}</th>
+                            <th scope="row">{{$customer->name}}</th>
+                            <th scope="row">{{$customer->email}}</th>
 
                             </tr>
                                   <div class="flex items-center gap-3">
@@ -40,7 +41,7 @@
 
                                     <a class="btn btn-info" href="{{ route('customers.edit', $customer->id) }}">{{ __('Editar') }}</a>
 
-                                        @if (session('status') === 'vehicle-updated')
+                                        @if (session('status') === 'customer-updated')
                                             <p
                                                 x-data="{ show: true }"
                                                 x-show="show"
@@ -54,7 +55,7 @@
 
 
 
-                                    <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST" style="display:inline">
+                                    <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" style="display:inline">
                                         @csrf
                                         @method('DELETE')
                                         <x-danger-button class="ms-3">{{ __('Delete') }}</x-danger-button>

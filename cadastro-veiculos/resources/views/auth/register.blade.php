@@ -8,9 +8,9 @@
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
-         <!-- userName -->
+         <!-- Username -->
         <div>
-            <x-input-label for="name" :value="__('UserName')" />
+            <x-input-label for="name" :value="__('Username')" />
             <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')"  autocomplete="new-username" />
             <x-input-error :messages="$errors->get('username')" class="mt-2" />
         </div>
