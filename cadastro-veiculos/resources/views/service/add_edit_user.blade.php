@@ -4,26 +4,12 @@
     <div class="col-md-12">
         <div class="form-appl">
             <h3>{{ $title }}</h3>
-            <form class="form1" method="post" action="@if (isset($edit->id)) {{ route('user.update', ['id' => $edit->id]) }}@else{{ route('user.store') }} @endif" enctype="multipart/form-data">
+            <form class="form1" method="post" action="@if (isset($edit->id)) {{ route('service.update', ['id' => $edit->id]) }}@else{{ route('service.store') }} @endif" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group col-md-12 mb-3">
                     <label for="">Your Name</label>
                     <input class="form-control" type="text" name="name" placeholder="Enter Your Name" value="@if (isset($edit->id)) {{ $edit->name }}@else {{ old('name') }} @endif">
                     @error('name')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group col-md-12 mb-3">
-                    <label for="">Usuario</label>
-                    <input class="form-control" type="text" name="username" placeholder="Enter Your Name" value="@if (isset($edit->id)) {{ $edit->username }}@else {{ old('username') }} @endif">
-                    @error('username')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group col-md-12 mb-3">
-                    <label for="">CPF</label>
-                    <input class="form-control" type="text" name="cpf" placeholder="000.000.000-00" value="@if (isset($edit->id)) {{ $edit->cpf }}@else {{ old('cpf') }} @endif">
-                    @error('ucpf')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>

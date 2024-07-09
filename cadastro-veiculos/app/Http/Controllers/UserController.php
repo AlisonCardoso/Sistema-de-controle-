@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
@@ -30,11 +31,13 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(  Request $request)
     {
         $request->validate(
             [
                 'name' => 'required',
+                'username' => 'required',
+                'cpf' => 'required| string|max:15',
                 'email' => 'required|email|unique:users',
                 'photo' => 'mimes:png,jpeg,jpg|max:2048',
             ]
@@ -56,7 +59,7 @@ class UserController extends Controller
         }
 
         $result = $insert->save();
-        Session::flash('success', 'User registered successfully');
+        Session::flash('success', 'Usuario cadastrado com sucesso');
         return redirect()->route('user.index');
     }
 
@@ -86,12 +89,16 @@ class UserController extends Controller
         $request->validate(
             [
                 'name' => 'required',
+                'username' => 'required',
+                'cpf' => 'required| string|max:15',
                 'email' => 'required|email|unique:users,email,' . $id,
                 'photo' => 'mimes:png,jpeg,jpg|max:2048',
             ]
         );
         $update = User::findOrFail($id);
         $update->name = $request->name;
+        $update->username = $request->cpf;
+        $update->cpf = $request->username;
         $update->email = $request->email;
 
         if ($request->hasfile('photo')) {
@@ -110,7 +117,7 @@ class UserController extends Controller
         }
 
         $result = $update->save();
-        Session::flash('success', 'User updated successfully');
+        Session::flash('success', 'Usuario atualizado com sucesso');
         return redirect()->route('user.index');
     }
 
@@ -121,14 +128,14 @@ class UserController extends Controller
     {
         $userData = User::findOrFail($request->user_id);
         $userData->delete();
-        // delete photo if exists
+        // delete foto se existir
         if (!is_null($userData->photo)) {
             $photo = public_path('uploads/' . $userData->photo);
             if (File::exists($photo)) {
                 unlink($photo);
             }
         }
-        Session::flash('success', 'User deleted successfully');
+        Session::flash('success', 'Usuario exluido com sucesso');
         return redirect()->route('user.index');
     }
 }
