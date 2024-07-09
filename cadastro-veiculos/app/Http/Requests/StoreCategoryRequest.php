@@ -25,7 +25,8 @@ class StoreCategoryRequest extends FormRequest
            'name'=> 'required |max:150',
             'description'=> 'required |max:350|string',
             'is_active'=> 'sometimes'
-            
+           // 'is_active'=> '== true ? 1:0|sometimes'
+
         ];
     }
 }

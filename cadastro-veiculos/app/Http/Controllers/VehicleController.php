@@ -9,18 +9,19 @@ use Illuminate\Support\Facades\Auth;
 
 class VehicleController extends Controller
 {
-
+    private $user;
+    private $vehicle;
+    public function __construct()
+    {
+        $this->user = new User();
+        $this->vehicle = new Vehicle();
+    }
 
 
     public function index()
     {
-        //$vehicles = Auth::user()->vehicles;
-       // Auth::user()->
-
-
-
-
-        $vehicles = Vehicle::all();
+        $vehicles = Auth::user()->vehicles;
+       // $vehicles = Vehicle::all();
         return view('vehicles.index', compact('vehicles'));
 
 
@@ -29,7 +30,11 @@ class VehicleController extends Controller
 
     public function create()
     {
-        return view('vehicles.create');
+        $title = "Adicionar Novo veiculo";
+        $vehicles = $this->vehicle->all();
+       $users = $this->user->all();
+
+        return view('vehicles.create', compact('vehicles', 'title'));
     }
 
 

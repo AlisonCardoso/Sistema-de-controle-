@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::resources(['vehicles'=>VehicleController::class]);
     Route::resources(['customers'=> CustomerController::class]);
     Route::resources(['products'=> ProductController::class]);
+    Route::resources(['categories'=> CategoryController::class]);
 
     Route::get('/admin', [UserController::class, 'index'])->name('user.index');
    //Route::get('customers', [CustomerController::class,'index'])->name('customer.index');
