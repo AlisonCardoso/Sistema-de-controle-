@@ -24,11 +24,20 @@ Route::middleware('auth')->group(function () {
     Route::resources(['customers'=> CustomerController::class]);
     Route::resources(['products'=> ProductController::class]);
 
-
+    Route::get('/admin', [UserController::class, 'index'])->name('user.index');
    //Route::get('customers', [CustomerController::class,'index'])->name('customer.index');
-
+Route::group(['prefix' => 'admin/user'], function () {
+    Route::get('/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('/add', [UserController::class, 'store'])->name('user.store');
+    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::post('/update/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::post('/delete', [UserController::class, 'destroy'])->name('user.delete');
+});
 
 });
+
+
+
 
 
 require __DIR__.'/auth.php';

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -12,8 +14,11 @@ class ProductController extends Controller
      * Display a listing of the resource.
      */
     public function index()
+
     {
-        return view('product.index');
+        $products = Product::latest('id')->get();
+
+        return view('product.index', compact('products'));
     }
 
     /**
@@ -27,10 +32,10 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
 
     {
-       /* $rules = [
+        $rules = [
 
             'name' => 'required|min:5',
             'brand' => 'required|min:5',
@@ -50,7 +55,7 @@ class ProductController extends Controller
       if ($validator->fails()) {
         return redirect()->route('products.create')
             ->withInput()->withErrors($validator);
-      }*/
+      }
 
       //cadastrar os produtos na base de Dados
       $product = new product();
@@ -106,7 +111,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(StoreProductRequest  $request, Product $product)
     {
         //
     }
