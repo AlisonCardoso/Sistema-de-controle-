@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\User;
@@ -14,11 +16,11 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    private $user;
+
     private $category;
     public function __construct()
     {
-        $this->user = new User();
+
         $this->category = new Category();
     }
     public function index()
@@ -38,13 +40,14 @@ class CategoryController extends Controller
        return view('category.create' , compact('categories', 'title'));
     }
 
-    public function store(StoreCategoryRequest $request)
+    public function store(Request $request)
     {
-      
+
+        Category::create($request->all());
+
+           $category = new Category();
 
 
-            $category = new Category();
-      //$category->user_id  = $request->user_id;
       $category->name = $request->name;
       $category->description = $request->description;
       $category->is_active = $request->is_active == true ? 1:0;
@@ -52,10 +55,9 @@ class CategoryController extends Controller
       $category->save();
 
       Session::flash('success', 'Categoria cadastrada com sucesso');
-      return redirect()->route('category.index');
+      return redirect()->route('categories.index');
 
-       /* return redirect()->route('categories.index')
-        ->with('status', 'Categoria cadastrada com sucesso');*/
+       // return redirect()->route('categories.index')->with('status', 'Categoria cadastrada com sucesso');
 
 
 

@@ -44,10 +44,10 @@ class UserController extends Controller
         );
 
         $filePath = public_path('uploads');
-        $insert = new User();
-        $insert->name = $request->name;
-        $insert->email = $request->email;
-        $insert->password = bcrypt('password');
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt('password');
 
 
         if ($request->hasfile('photo')) {
@@ -55,10 +55,10 @@ class UserController extends Controller
             $file_name = time() . $file->getClientOriginalName();
 
             $file->move($filePath, $file_name);
-            $insert->photo = $file_name;
+            $user->photo = $file_name;
         }
 
-        $result = $insert->save();
+        $result = $user->save();
         Session::flash('success', 'Usuario cadastrado com sucesso');
         return redirect()->route('user.index');
     }
