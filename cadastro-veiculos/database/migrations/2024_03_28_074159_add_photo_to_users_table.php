@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('photo')->nullable()->after('email');
+            $table->string('acess_level')->default('user')->after('photo');
         });
     }
 
