@@ -1,9 +1,5 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+extends('layouts.content')
+@section('main-content')
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -12,6 +8,21 @@
 
                     <form method="post" action="{{ route('vehicles.store') }}" class="mt-6 space-y-6">
                         @csrf
+
+                        /* $table->foreignId('user_id')->constrained();
+                        $table->foreignId('sub_command_id')->constrained();
+                        $table->string('brand'); //marca
+                        $table->string('model');//modelo
+                        $table->string('prefix')->unique();//prefixo
+                        $table->string('patrimonio')->unique();//patrimonio
+                        $table->boolean('characterized')->default(true);// caracterizada
+                        $table->boolean('is_active')->default(true);
+                        $table->boolean('is_locade')->default(true);
+                        $table->string('plate')->unique(); //placa
+                        $table->year('year'); //preco fipe
+                        $table->decimal('price', 8, 2);
+                        $table->string('type'); //tipo
+                        $table->string('status'); //status*/
 
                         <div>
                             <x-text-input id="user_id" name="user_id" type="hidden" class="mt-1 block w-full" autocomplete="user_id" value="{{Auth::user()->id}}" />
@@ -97,12 +108,13 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+
 
 
 
 
 </section>
+@endsection
 
 
 

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RegionalCommand;
+use App\Workshop;
 use Illuminate\Http\Request;
 
-class RegionalCommandController extends Controller
+class WorkshopController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class RegionalCommandController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(RegionalCommand $regionalCommand)
+    public function show(Workshop $workshop)
     {
         //
     }
@@ -42,7 +42,7 @@ class RegionalCommandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(RegionalCommand $regionalCommand)
+    public function edit(Workshop $workshop)
     {
         //
     }
@@ -50,7 +50,7 @@ class RegionalCommandController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, RegionalCommand $regionalCommand)
+    public function update(Request $request, Workshop $workshop)
     {
         //
     }
@@ -58,7 +58,7 @@ class RegionalCommandController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(RegionalCommand $regionalCommand)
+    public function destroy(Workshop $workshop)
     {
         //
     }

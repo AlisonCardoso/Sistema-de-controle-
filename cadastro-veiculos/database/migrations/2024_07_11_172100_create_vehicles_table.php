@@ -14,18 +14,24 @@ return new class extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('sub_command_id')->constrained();
             $table->string('brand'); //marca
             $table->string('model');//modelo
-            $table->string('prefix')->unique();//prefixo
+            $table->string('prefix')->unique()->nullable();//prefixo
+            $table->string('patrimonio')->unique()->nullable();//patrimonio
             $table->boolean('characterized')->default(true);// caracterizada
-            $table->boolean('active')->default(true); 
+            $table->boolean('is_active')->default(true);
+            $table->boolean('is_locade')->default(true);
             $table->string('plate')->unique(); //placa
-            $table->year('year'); //preco fipe
-            $table->decimal('price', 8, 2);
-            $table->enum('type', ['car', 'truck', 'motorcycle']); //tipo
+            $table->year('year'); // ano
+            $table->decimal('price', 8, 2)->nullable();//preco fipe
+            $table->string('type'); //tipo
+            $table->string('photo')->nullable(); //foto
+            $table->string('hodometro')->nullable(); //hodometro
+
 
             $table->timestamps();
-            
+
 
 
 
