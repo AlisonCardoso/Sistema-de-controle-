@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\SubCommand;
+use App\Models\SubCommand;
 use Illuminate\Http\Request;
 
 class SubCommandController extends Controller
