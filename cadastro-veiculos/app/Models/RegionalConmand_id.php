@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SubComannd extends Model
+class RegionalConmand_id extends Model
 {
     use HasFactory;
 }
